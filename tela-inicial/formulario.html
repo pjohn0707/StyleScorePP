@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar produto</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+
+<body>
+    <h2>Cadastrar Produto</h2>
+    <form id="form-cadastro">
+        <label for="imagem">Imagem</label>
+        <input type="text" id="imagem">
+
+        <label for="nome">Nome</label>
+        <input type="text" id="nome">
+
+        <label for="valor">Valor</label>
+        <input type="text" id="valor">
+
+        <label for="categoria">Categoria</label>
+        <select id="categoria">
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+        </select>
+
+        <label for="loja">URL da Loja</label>
+        <input type="text" id="loja">
+
+        <button id="enviar">Enviar</button>
+    </form>
+
+    <script src="formulario.js"></script>
+</body>
+
+</html>
