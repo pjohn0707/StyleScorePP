@@ -16,32 +16,11 @@ async function carregarDetalhesProduto() {
                     <h1>${produtoData.nome}</h1>
                     <p>R$ ${parseFloat(produtoData.valor).toFixed(2)}</p>
                     <a href="${produtoData.loja}" target="_blank">Comprar na loja</a>
-                    <button class="icone-botao">
+                    <button class="icone-botao" onclick="salvarProduto(${produtoId})">
                         <i class="fa-regular fa-bookmark"></i>
                     </button>
                 </div>
             `;
-
-            const responseComparacao = await fetch(`http://localhost:3006/api/get/comparacao/${produtoId}`);
-            const comparacoes = await responseComparacao.json();
-
-            if (comparacoes.success) {
-                const comparacaoContainer = document.querySelector(".container-comparacao");
-                comparacaoContainer.innerHTML = '';
-
-                comparacoes.data.forEach(comp => {
-                    comparacaoContainer.innerHTML += `
-                        <div class="produto">
-                            <img src="${comp.imagem}" alt="${comp.nome}">
-                            <div class="produto-detalhes">
-                                <h1>${comp.nome}</h1>
-                                <p>R$ ${parseFloat(comp.valor).toFixed(2)}</p>
-                                <a href="${comp.loja}" target="_blank">Comprar na loja</a>
-                            </div>
-                        </div>
-                    `;
-                });
-            }
         } else {
             console.log("Erro ao carregar detalhes do produto:", produto.message);
         }
@@ -49,3 +28,34 @@ async function carregarDetalhesProduto() {
         console.error('Erro ao carregar detalhes do produto:', error);
     }
 }
+
+async function salvarProduto(produtoId) {
+    const usuarioId = localStorage.getItem('usuario_id'); // Obtenha o ID do usuário logado
+
+    if (!usuarioId) {
+        alert("Você precisa estar logado para salvar produtos.");
+        return;
+    }
+
+    const dados = {
+        usuario_id: usuarioId, // Envie o ID do usuário logado
+        produto_id: produtoId
+    };
+
+    try {
+        const response = await fetch(`http://localhost:3006/api/store/salvar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dados)
+        });
+
+        const resultado = await response.json();
+
+        alert(resultado.message); // Exibe a mensagem de sucesso
+    } catch (error) {
+        console.error('Erro ao salvar produto:', error);
+    }
+}
+

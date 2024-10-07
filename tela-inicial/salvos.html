@@ -1,26 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela inicial - StyleScore</title>
-    <link rel="stylesheet" href="telaInicial.css">
+    <title>Produtos Salvos</title>
+    <link rel="stylesheet" href="salvos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <header>
         <section class="header-container">
+
             <a href="../pages-log-cad/login/login.html" class="icone-botao">
                 <i class="fas fa-sign-out-alt"></i>
             </a>
 
-            <a href="../tela-inicial/salvos.html">
-                <button class="icone-botao">
+            <button class="icone-botao">
+                <a href="../tela-inicial/salvos.html">
                     <i class="fas fa-bookmark"></i>
-                </button>
-            </a>
+                </a>
+            </button>
 
             <button class="icone-botao">
                 <a href="../tela-inicial/user.html">
@@ -30,7 +31,9 @@
 
             <button class="logo-botao">
                 <h2 class="site-texto">
-                    <span class="style">Style</span><span class="score">Score</span>
+                    <a href="../tela-inicial/telaInicial.html">
+                        <span class="style">Style</span><span class="score">Score</span>
+                    </a>
                 </h2>
             </button>
 
@@ -44,20 +47,8 @@
     </header>
 
     <main>
-        <section class="categorias">
-            <button class="categoria-botao">Masculino</button>
-            <button class="categoria-botao">Feminino</button>
-        </section>
-
-        <section>
-            <h2 class="titulo-secao">Roupas Masculinas</h2>
-            <div class="produtos-container masculino"></div>
-        </section>
-
-        <section>
-            <h2 class="titulo-secao">Roupas Femininas</h2>
-            <div class="produtos-container feminino"></div>
-        </section>
+        <h1>Produtos Salvos</h1>
+        <div id="produtos-salvos" class="produtos-container"></div>
     </main>
 
     <footer>
@@ -82,7 +73,7 @@
         </div>
     </footer>
 
-    <script src="scriptListaProdutos.js"></script>
+    <script src="salvos.js"></script>
 
 </body>
 

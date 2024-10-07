@@ -4,7 +4,7 @@ body {
     background-color: #BFC8D6;
 }
 
-/* ------------------------------------- HEADER ------------------------------------------*/
+/* ----------------------------------------- HEADER ------------------------------------------- */
 
 header {
     max-width: 100vw;
@@ -63,6 +63,10 @@ header {
     font-weight: bold;
 }
 
+.site-texto a{
+    text-decoration: none;
+}
+
 .style {
     color: #000000;
 }
@@ -101,41 +105,10 @@ header {
     color: #000;
 }
 
-/* ------------------------------------- MAIN ------------------------------------------*/
+/*---------------------------------------- MAIN -----------------------------------------------*/
 
-.categorias {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.categoria-botao {
-    background-color: #000000;
-    color: #ffffff;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.categoria-botao:hover {
-    background-color: #333333;
-}
-
-.titulo-secao {
-    cursor: pointer;
-    font-size: 24px;
-    border: none;
-    background-color: transparent;
-    text-align: left;
-    margin-left: 37px;
-    color: #000000;
-    margin-bottom: 10px;
-    display: block;
+h1 {
+    text-align: center;
 }
 
 .produtos-container {
@@ -160,23 +133,24 @@ header {
     transform: translateY(-5px);
 }
 
+.produto-botao {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
 .produto img {
     width: 100%;
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
-}
-
-.produto-botao {
-    background: none;
-    border: none;
-    padding: 0;
     cursor: pointer;
 }
 
 .produto h3 {
     font-size: 16px;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .produto p {
@@ -185,7 +159,23 @@ header {
     color: #333333;
 }
 
-/* ------------------------------------- FOOTER ------------------------------------------*/
+.remover-botao {
+    background-color: #e74c3c; /* Vermelho */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.remover-botao:hover {
+    background-color: #c0392b; /* Vermelho escuro */
+}
+
+
+/*---------------------------------------- FOOTER ---------------------------------------------*/
 
 footer {
     background-color: #000000;
@@ -250,4 +240,3 @@ footer {
     max-width: 300px;
     margin: 0 auto;
 }
-

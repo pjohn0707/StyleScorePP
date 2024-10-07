@@ -6,12 +6,12 @@ document.getElementById('form-comparacao').addEventListener('submit', async func
     formData.append('produto_id', document.getElementById("produto_id").value);
     formData.append('imagem', document.getElementById("imagem").value);
     formData.append('nome', document.getElementById("nome").value);
-    
+
     // Valida se o valor foi preenchido e é um número válido
     let valor = document.getElementById("valor").value;
     valor = valor.replace(",", ".");
     valor = parseFloat(valor);
-    
+
     if (isNaN(valor)) {
         alert('Por favor, insira um valor numérico válido.');
         return;

@@ -21,6 +21,8 @@ document.getElementById('form-login').addEventListener('submit', async (event) =
         const resultado = await response.json();
 
         if (resultado.success) {
+            // Armazena o ID do usuário no localStorage
+            localStorage.setItem('usuario_id', resultado.data.id);
             document.getElementById('mensagem').innerText = resultado.message;
             window.location.href = '../../tela-inicial/telaInicial.html';
         } else {
