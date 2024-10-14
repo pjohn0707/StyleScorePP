@@ -24,7 +24,7 @@ async function carregarProdutos() {
                     button.className = "produto-botao";
 
                     const img = document.createElement("img");
-                    img.src = produto.imagem;
+                    img.src = `http://localhost:3006/uploads/${produto.imagem}`;
                     img.addEventListener("click", function () {
                         window.location.href = `detalhes.html?id=${produto.id}`;
                     });

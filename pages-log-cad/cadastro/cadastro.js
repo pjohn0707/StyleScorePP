@@ -32,4 +32,6 @@ document.getElementById('form-cadastro').addEventListener('submit', async (event
     } catch (error) {
         document.getElementById('mensagem').innerText = 'Erro ao conectar com o servidor!';
     }
+
 });
+

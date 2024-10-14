@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -9,24 +9,24 @@
 
 <body>
     <h2>Cadastrar Produto</h2>
-    <form id="form-cadastro">
-        <label for="imagem">Imagem</label>
-        <input type="text" id="imagem">
+    <form action="#" id="form-cadastrarproduto" enctype="multipart/form-data">
+        <label for="">Imagem</label>
+        <input type="file" id="imagem" name="imagem">
 
-        <label for="nome">Nome</label>
-        <input type="text" id="nome">
+        <label for="">Nome</label>
+        <input type="text" id="nome" name="nome">
 
-        <label for="valor">Valor</label>
-        <input type="text" id="valor">
+        <label for="">Valor</label>
+        <input type="text" id="valor" name="valor">
 
-        <label for="categoria">Categoria</label>
-        <select id="categoria">
+        <label for="">Categoria</label>
+        <select id="categoria" name="categoria">
             <option value="masculino">Masculino</option>
             <option value="feminino">Feminino</option>
         </select>
 
-        <label for="loja">URL da Loja</label>
-        <input type="text" id="loja">
+        <label for="">URL da Loja</label>
+        <input type="text" id="loja" name="loja">
 
         <button id="enviar">Enviar</button>
     </form>

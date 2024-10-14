@@ -20,7 +20,7 @@ header {
     height: 100%;
 }
 
-.icone-botao {
+.icones {
     background: none;
     border: none;
     cursor: pointer;
@@ -29,13 +29,13 @@ header {
     color: inherit;
 }
 
-.icone-botao i {
+.icones i {
     font-size: 4vh;
     color: #000000;
 }
 
-.icone-botao:focus,
-.icone-botao:hover {
+.icones:focus,
+.icones:hover {
     color: #000000;
 }
 
@@ -51,16 +51,18 @@ header {
     color: inherit;
 }
 
-.logo-botao {
+.logo {
     background: none;
     border: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .site-texto {
     font-size: 50px;
     color: #ffffff;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .style {
@@ -98,61 +100,149 @@ header {
 
 .pesquisa-botao i {
     font-size: 3vh;
-    color: #000;
+    color: #000000;
 }
 
 /* ------------------------------------- MAIN ------------------------------------------*/
 
-.profile {
+.user {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 80vh;
 }
 
-.profile img {
+.user img {
     width: 60vh;
     height: 60vh;
     border-radius: 50%;
     margin-right: 40px;
 }
 
-.profile-info {
+.user-info {
     flex-grow: 1;
     max-width: 400px;
 }
 
 
-.input-group {
+.input {
     margin-bottom: 15px;
 }
 
-.input-group label {
+.input label {
     font-size: 14px;
-    color: #333;
+    color: #333333;
     margin-bottom: 5px;
     display: block;
 }
 
-.input-field {
+.input-campo {
     position: relative;
     width: 70%;
 }
 
-.input-field input {
+.input-campo input {
     width: 100%;
     padding: 10px 40px 10px 10px;
-    /* Espaço para o ícone */
-    border: 1px solid #ccc;
+    border: 1px solid #cccccc;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #ffffff;
 }
 
-.input-field i {
+.input-campo i {
     position: absolute;
     margin-left: 48vh;
     top: 50%;
     transform: translateY(-50%);
     color: #000000;
     cursor: pointer;
+}
+
+#botao-atualizar {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#botao-atualizar:hover {
+    background-color: #47A34C;
+    transform: scale(1.05);
+}
+
+#botao-atualizar:active {
+    transform: scale(0.95);
+}
+
+/* ------------------------------------- FOOTER ------------------------------------------*/
+
+footer {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.footer-section {
+    text-align: center;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.footer-section p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.social-button {
+    background-color: transparent;
+    padding: 10px;
+    margin: 0 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.social-button i {
+    color: #ffffff;
+    font-size: 24px;
+}
+
+.social-button:hover {
+    background-color: #ffffff;
+}
+
+.social-button:hover i {
+    color: #000000;
+}
+
+.sobre-nos-texto {
+    max-width: 300px;
+    margin: 0 auto;
 }

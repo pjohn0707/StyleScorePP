@@ -1,40 +1,61 @@
 const connection = require('../config/db');
 
-async function storeInicial(request, response) {
-    const valor = parseFloat(request.body.valor);
+const fs = require('fs');
+const path =  require('path');
 
-    if (isNaN(valor)) {
+const uploadPath = path.join(__dirname, '..', 'uploads');
+
+if (!fs.existsSync(uploadPath)) {
+    fs.mkdirSync(uploadPath);
+}
+
+
+async function storeInicial(request, response) {
+    if (!request.files || !request.files.imagem) {
         return response.status(400).json({
             success: false,
-            message: "Valor inválido. Certifique-se de enviar um número válido."
+            message: "Você não enviou o arquivo de imagem"
         });
     }
 
-    const params = [
-        request.body.imagem,
-        request.body.nome,
-        valor,
-        request.body.categoria,
-        request.body.loja // Adiciona a URL da loja
-    ];
+    const imagem = request.files.imagem;
+    const imagemNome = Date.now() + path.extname(imagem.name);
 
-    const query = "INSERT INTO produtos_inicial(imagem, nome, valor, categoria, loja) VALUES(?,?,?,?,?)";
-
-    connection.query(query, params, (err, results) => {
-        if (results) {
-            response.status(201).json({
-                success: true,
-                message: "Produto cadastrado com sucesso!",
-                data: results
-            });
-        } else {
-            console.error("Erro ao cadastrar produto:", err);
-            response.status(400).json({
+    imagem.mv(path.join(uploadPath, imagemNome), (erro) => {
+        if (erro) {
+            console.error("Erro ao mover o arquivo:", erro);
+            return response.status(400).json({
                 success: false,
-                message: "Erro ao cadastrar o produto.",
-                sqlMessage: err.sqlMessage
+                message: "Erro ao mover o arquivo"
             });
         }
+
+        const params = [
+            imagemNome,
+            request.body.nome,
+            request.body.valor,
+            request.body.categoria,
+            request.body.loja
+        ];
+
+        const query = "INSERT INTO produtos_inicial(imagem, nome, valor, categoria, loja) VALUES(?,?,?,?,?)";
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response.status(200).json({
+                    success: true,
+                    message: "Produto cadastrado com sucesso!",
+                    data: results
+                });
+            } else {
+                console.error("Erro no cadastro:", err);
+                response.status(400).json({
+                    success: false,
+                    message: "Erro ao cadastrar o produto.",
+                    sql: err,
+                });
+            }
+        });
     });
 }
 
@@ -80,27 +101,53 @@ async function getInicialById(request, response) {
 }
 
 async function storeComparacao(request, response) {
-    const { produto_id, imagem, nome, valor, loja } = request.body;
-    const query = "INSERT INTO produtos_comparacao(produto_id, imagem, nome, valor, loja) VALUES(?,?,?,?,?)";
-    const params = [produto_id, imagem, nome, valor, loja];
+    if (!request.files || !request.files.imagem) {
+        return response.status(400).json({
+            success: false,
+            message: "Você não enviou o arquivo de foto"
+        });
+    }
 
-    connection.query(query, params, (err, results) => {
-        if (results) {
-            response.status(201).json({
+    const imagem = request.files.imagem;
+    const imagemNome = Date.now() + path.extname(imagem.name);
+
+    imagem.mv(path.join(uploadPath, imagemNome), (erro) => {
+        if (erro) {
+            return response.status(400).json({
+                success: false,
+                message: "Erro ao mover o arquivo"
+            });
+        }
+
+        const params = [
+            request.body.produto_id,
+            imagemNome,
+            request.body.nome,
+            request.body.valor,
+            request.body.loja
+        ];
+
+        const query = "INSERT INTO produtos_comparacao(produto_id, imagem, nome, valor, loja) VALUES(?,?,?,?,?)";
+    
+        connection.query(query, params, (err, results) => {
+            if (err) {
+                console.error("Erro ao cadastrar produto de comparação:", err);
+                return response.status(400).json({
+                    success: false,
+                    message: "Erro ao cadastrar o produto de comparação.",
+                    sqlMessage: err.sqlMessage
+                });
+            }
+
+            response.status(200).json({
                 success: true,
                 message: "Produto de comparação cadastrado com sucesso!",
                 data: results
             });
-        } else {
-            console.error("Erro ao cadastrar produto de comparação:", err);
-            response.status(400).json({
-                success: false,
-                message: "Erro ao cadastrar o produto de comparação.",
-                sqlMessage: err.sqlMessage
-            });
-        }
+        });
     });
 }
+
 
 async function getComparacaoByProdutoId(request, response) {
     const params = [request.params.produto_id];
@@ -124,19 +171,29 @@ async function getComparacaoByProdutoId(request, response) {
 }
 
 const salvarProduto = (req, res) => {
-    const usuario_id = req.body.usuario_id; // ID do usuário logado
-    const produto_id = req.body.produto_id; // ID do produto sendo salvo
+    const usuario_id = req.body.usuario_id;
+    const produto_id = req.body.produto_id;
 
     if (!usuario_id || !produto_id) {
         return res.status(400).json({ success: false, message: "ID do usuário ou do produto não fornecido." });
     }
 
-    const query = "INSERT INTO produtos_salvos(usuario_id, produto_id) VALUES(?, ?)";
-    connection.query(query, [usuario_id, produto_id], (error, results) => {
+    const verificarQuery = "SELECT * FROM produtos_salvos WHERE usuario_id = ? AND produto_id = ?";
+    connection.query(verificarQuery, [usuario_id, produto_id], (error, results) => {
         if (error) {
             return res.status(500).send({ error: error.message });
         }
-        res.status(201).send({ success: true, message: 'Produto salvo com sucesso!' });
+        if (results.length > 0) {
+            return res.status(400).json({ success: false, message: "Este produto já foi salvo." });
+        }
+
+        const query = "INSERT INTO produtos_salvos(usuario_id, produto_id) VALUES(?, ?)";
+        connection.query(query, [usuario_id, produto_id], (error, results) => {
+            if (error) {
+                return res.status(500).send({ error: error.message });
+            }
+            res.status(201).send({ success: true, message: 'Produto salvo com sucesso!' });
+        });
     });
 };
 
@@ -163,6 +220,28 @@ async function getProdutosSalvos(request, response) {
     });
 }
 
+async function deletarProdutoSalvo(req, res) {
+    const { usuario_id, produto_id } = req.params;
+
+    if (!usuario_id || !produto_id) {
+        return res.status(400).json({ success: false, message: "ID do usuário ou do produto não fornecido." });
+    }
+
+    const query = "DELETE FROM produtos_salvos WHERE usuario_id = ? AND produto_id = ?";
+
+    connection.query(query, [usuario_id, produto_id], (err, results) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: "Erro ao deletar o produto salvo.", error: err.message });
+        }
+
+        if (results.affectedRows > 0) {
+            res.status(200).json({ success: true, message: "Produto removido da lista de salvos com sucesso! Recarregue a página." });
+        } else {
+            res.status(404).json({ success: false, message: "Produto não encontrado na lista de salvos." });
+        }
+    });
+}
+
 module.exports = {
     storeInicial,
     getInicial,
@@ -170,5 +249,6 @@ module.exports = {
     storeComparacao,
     getComparacaoByProdutoId,
     salvarProduto,
-    getProdutosSalvos
+    getProdutosSalvos,
+    deletarProdutoSalvo
 };

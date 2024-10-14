@@ -32,5 +32,5 @@ async function storeCadastro(request, response) {
 }
 
 module.exports = {
-    storeCadastro
+    storeCadastro,
 };

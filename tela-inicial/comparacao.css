@@ -21,7 +21,6 @@ h2 {
     color: #ffffff;
     width: 90%;
     max-width: 500px;
-    /* Limita a largura máxima do formulário */
     box-sizing: border-box;
 }
 
@@ -50,7 +49,6 @@ h2 {
     font-size: 16px;
 }
 
-/* Estilos responsivos */
 @media (max-width: 768px) {
     h2 {
         font-size: 20px;

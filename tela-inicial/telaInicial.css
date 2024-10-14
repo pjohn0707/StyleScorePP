@@ -20,7 +20,7 @@ header {
     height: 100%;
 }
 
-.icone-botao {
+.icones {
     background: none;
     border: none;
     cursor: pointer;
@@ -29,13 +29,13 @@ header {
     color: inherit;
 }
 
-.icone-botao i {
+.icones i {
     font-size: 4vh;
     color: #000000;
 }
 
-.icone-botao:focus,
-.icone-botao:hover {
+.icones:focus,
+.icones:hover {
     color: #000000;
 }
 
@@ -51,10 +51,11 @@ header {
     color: inherit;
 }
 
-.logo-botao {
+.logo {
     background: none;
     border: none;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .site-texto {
