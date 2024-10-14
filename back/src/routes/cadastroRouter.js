@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const { storeCadastro, deleteCadastro } = require('../controller/cadastroController');
+const { storeCadastro } = require('../controller/cadastroController');
 
 /**
 * @swagger
