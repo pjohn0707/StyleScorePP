@@ -1,5 +1,3 @@
-//Carregando os produtos na tela inicial 
-
 document.addEventListener("DOMContentLoaded", carregarProdutos);
 
 async function carregarProdutos() {
@@ -8,53 +6,42 @@ async function carregarProdutos() {
         const result = await response.json();
 
         if (result.success) {
-            const produtoContainers = document.querySelectorAll(".produtos-container");
+            const masculinoContainer = document.querySelector(".produtos-container.masculino");
+            const femininoContainer = document.querySelector(".produtos-container.feminino");
 
-            produtoContainers.forEach(lista => lista.innerHTML = '');
+            // Limpa os contêineres antes de adicionar os produtos
+            masculinoContainer.innerHTML = '';
+            femininoContainer.innerHTML = '';
 
             result.data.forEach(produto => {
-                const categoria = produto.categoria;
-                const produtoList = document.querySelector(`.produtos-container.${categoria}`);
+                const card = document.createElement("div");
+                card.className = "produto";
 
-                if (produtoList) {
-                    const card = document.createElement("div");
-                    card.className = "produto";
+                const img = document.createElement("img");
+                img.src = `http://localhost:3006/uploads/${produto.imagem}`;
+                img.addEventListener("click", function () {
+                    window.location.href = `detalhes.html?id=${produto.id}`;
+                });
 
-                    const button = document.createElement("button");
-                    button.className = "produto-botao";
+                const nome = document.createElement("h3");
+                nome.textContent = produto.nome;
+                nome.addEventListener("click", function () {
+                    window.location.href = `detalhes.html?id=${produto.id}`;
+                });
 
-                    const img = document.createElement("img");
-                    img.src = `http://localhost:3006/uploads/${produto.imagem}`;
-                    img.addEventListener("click", function () {
-                        window.location.href = `detalhes.html?id=${produto.id}`;
-                    });
+                const valor = document.createElement("p");
+                const valorNumerico = parseFloat(produto.valor);
+                valor.textContent = !isNaN(valorNumerico) ? `R$ ${valorNumerico.toFixed(2)}` : "Valor inválido";
 
-                    const button2 = document.createElement("button");
-                    button2.className = "produto-botao";
+                card.appendChild(img);
+                card.appendChild(nome);
+                card.appendChild(valor);
 
-                    const nome = document.createElement("h3");
-                    nome.textContent = produto.nome;
-                    nome.addEventListener("click", function () {
-                        window.location.href = `detalhes.html?id=${produto.id}`;
-                    });
-
-                    const valor = document.createElement("p");
-
-                    let valorNumerico = parseFloat(produto.valor);
-                    if (!isNaN(valorNumerico)) {
-                        valor.textContent = `R$ ${valorNumerico.toFixed(2)}`;
-                    } else {
-                        valor.textContent = `Valor inválido`;
-                    }
-
-                    card.appendChild(button);
-                    card.appendChild(button2);
-                    card.appendChild(valor);
-
-                    button.appendChild(img);
-                    button2.appendChild(nome);
-
-                    produtoList.appendChild(card);
+                // Adiciona ao contêiner correto com base na categoria
+                if (produto.categoria === 'masculino') {
+                    masculinoContainer.appendChild(card);
+                } else if (produto.categoria === 'feminino') {
+                    femininoContainer.appendChild(card);
                 }
             });
         } else {
