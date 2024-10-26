@@ -79,8 +79,8 @@ async function deletarProdutoSalvo(produtoId) {
         const resultado = await response.json();
 
         if (resultado.success) {
-            alert("Produto removido com sucesso! Recarregue a página!");
             carregarProdutosSalvos();
+            window.location.reload();
         } else {
             alert("Erro ao remover o produto: " + resultado.message);
         }

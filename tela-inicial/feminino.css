@@ -166,6 +166,7 @@ header {
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .produto-botao {
@@ -178,6 +179,7 @@ header {
 .produto h3 {
     font-size: 16px;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .produto p {

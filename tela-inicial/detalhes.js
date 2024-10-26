@@ -61,7 +61,12 @@ async function salvarProduto(produtoId) {
     const usuarioId = localStorage.getItem('usuario_id');
 
     if (!usuarioId) {
-        alert("Você precisa estar logado para salvar produtos.");
+        Swal.fire({
+            icon: 'warning',
+            title: 'Acesso Necessário',
+            text: 'Você precisa estar logado para salvar produtos.',
+            confirmButtonText: 'Ok'
+        });
         return;
     }
 
@@ -82,13 +87,28 @@ async function salvarProduto(produtoId) {
         const resultado = await response.json();
 
         if (resultado.success) {
-            alert(resultado.message);
+            Swal.fire({
+                icon: 'success',
+                title: 'Produto Salvo',
+                text: resultado.message,
+                confirmButtonText: 'Ok'
+            });
         } else {
-            alert("Erro ao salvar produto: " + resultado.message);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro',
+                text: resultado.message || 'Erro ao salvar produto.',
+                confirmButtonText: 'Ok'
+            });
             console.error("Erro:", resultado);
         }
     } catch (error) {
         console.error('Erro ao salvar produto:', error);
-        alert("Ocorreu um erro ao tentar salvar o produto.");
+        Swal.fire({
+            icon: 'error',
+            title: 'Erro de Conexão',
+            text: 'Ocorreu um erro ao tentar salvar o produto.',
+            confirmButtonText: 'Ok'
+        });
     }
 }
