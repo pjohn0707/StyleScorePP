@@ -12,7 +12,7 @@ document.getElementById('form-cadastro').addEventListener('submit', async (event
     };
 
     try {
-        const response = await fetch('http://localhost:3005/api/store/cadastro', {
+        const response = await fetch('https://style-score-r35023bt7-peters-projects-a2fabf48.vercel.app/:3005/api/store/cadastro', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
