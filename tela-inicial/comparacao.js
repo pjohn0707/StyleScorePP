@@ -6,7 +6,7 @@ button.onclick = async function(event) {
     let form = document.getElementById("form-comparacao");
     let dadosForm = new FormData(form);
 
-    const response = await fetch('http://localhost:3006/api/store/comparacao', {
+    const response = await fetch('http://localhost:3005/api/store/comparacao', {
         method: 'POST',
         body: dadosForm
     });

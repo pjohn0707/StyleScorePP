@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function carregarProdutos() {
     try {
-        const response = await fetch("http://localhost:3006/api/get/iniciais");
+        const response = await fetch("http://localhost:3005/api/get/iniciais");
         const result = await response.json();
 
         if (result.success) {
@@ -28,7 +28,7 @@ async function carregarProdutos() {
                     card.className = "produto";
 
                     const img = document.createElement("img");
-                    img.src = `http://localhost:3006/uploads/${produto.imagem}`;
+                    img.src = `http://localhost:3005/uploads/${produto.imagem}`;
                     img.addEventListener("click", function () {
                         window.location.href = `detalhes.html?id=${produto.id}`;
                     });
@@ -60,7 +60,7 @@ async function carregarProdutos() {
 function pesquisarProdutos() {
     const termoPesquisa = document.getElementById("campoPesquisa").value.toLowerCase();
 
-    fetch("http://localhost:3006/api/get/iniciais")
+    fetch("http://localhost:3005/api/get/iniciais")
         .then(response => response.json())
         .then(result => {
             if (result.success) {
@@ -76,7 +76,7 @@ function pesquisarProdutos() {
                     card.className = "produto";
 
                     const img = document.createElement("img");
-                    img.src = `http://localhost:3006/uploads/${produto.imagem}`;
+                    img.src = `http://localhost:3005/uploads/${produto.imagem}`;
                     img.addEventListener("click", function () {
                         window.location.href = `detalhes.html?id=${produto.id}`;
                     });

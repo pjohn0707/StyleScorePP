@@ -7,7 +7,7 @@ button.onclick = async function (e) {
     let dadosForm = new FormData(form);
 
     try {
-        const response = await fetch('http://localhost:3006/api/store/inicial', {
+        const response = await fetch('http://localhost:3005/api/store/inicial', {
             method: 'POST',
             body: dadosForm
         });

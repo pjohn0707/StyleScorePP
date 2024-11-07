@@ -10,7 +10,7 @@ document.getElementById('form-login').addEventListener('submit', async (event) =
     };
 
     try {
-        const response = await fetch('http://localhost:3006/api/store/login', {
+        const response = await fetch('http://localhost:3005/api/store/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

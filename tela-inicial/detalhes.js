@@ -5,12 +5,12 @@ async function carregarDetalhesProduto() {
     const produtoId = urlParams.get('id');
 
     try {
-        const responseProduto = await fetch(`http://localhost:3006/api/get/iniciais/detalhes/${produtoId}`);
+        const responseProduto = await fetch(`http://localhost:3005/api/get/iniciais/detalhes/${produtoId}`);
         const produto = await responseProduto.json();
 
         if (produto.success) {
             const produtoData = produto.data;
-            const caminhoImagem = `http://localhost:3006/uploads/${produtoData.imagem}`; 
+            const caminhoImagem = `http://localhost:3005/uploads/${produtoData.imagem}`; 
 
             document.querySelector(".produto").innerHTML = `
                 <img src="${caminhoImagem}" alt="${produtoData.nome}">
@@ -24,7 +24,7 @@ async function carregarDetalhesProduto() {
                 </div>
             `;
 
-            const responseComparacao = await fetch(`http://localhost:3006/api/get/comparacao/${produtoId}`);
+            const responseComparacao = await fetch(`http://localhost:3005/api/get/comparacao/${produtoId}`);
             const comparacoes = await responseComparacao.json();
             console.log (comparacoes);
 
@@ -35,7 +35,7 @@ async function carregarDetalhesProduto() {
 
                 comparacoes.data.forEach(comparacao => {
 
-                    const caminhoImagemComparacao = `http://localhost:3006/uploads/${comparacao.imagem}`;
+                    const caminhoImagemComparacao = `http://localhost:3005/uploads/${comparacao.imagem}`;
                     comparacaoContainer.innerHTML += `
                         <div class="produto">
                             <img src="${caminhoImagemComparacao}" alt="${comparacao.nome}">
@@ -76,7 +76,7 @@ async function salvarProduto(produtoId) {
     };
 
     try {
-        const response = await fetch(`http://localhost:3006/api/store/salvar`, {
+        const response = await fetch(`http://localhost:3005/api/store/salvar`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -9,7 +9,7 @@ async function carregarProdutosSalvos() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3006/api/get/salvos/${usuarioId}`);
+        const response = await fetch(`http://localhost:3005/api/get/salvos/${usuarioId}`);
         const resultado = await response.json();
 
         if (resultado.success) {
@@ -33,7 +33,7 @@ function exibirProdutos(produtos) {
         card.className = "produto";
 
         const img = document.createElement("img");
-        img.src = `http://localhost:3006/uploads/${produto.imagem}`;
+        img.src = `http://localhost:3005/uploads/${produto.imagem}`;
         img.addEventListener("click", function () {
             window.location.href = `detalhes.html?id=${produto.id}`;
         });
@@ -72,7 +72,7 @@ async function deletarProdutoSalvo(produtoId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3006/api/delete/salvo/${usuarioId}/${produtoId}`, {
+        const response = await fetch(`http://localhost:3005/api/delete/salvo/${usuarioId}/${produtoId}`, {
             method: 'DELETE'
         });
 

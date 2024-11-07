@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (usuarioId) {
         try {
-            const response = await fetch(`http://localhost:3006/api/perfil/${usuarioId}`, {
+            const response = await fetch(`http://localhost:3005/api/perfil/${usuarioId}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ document.getElementById('botao-atualizar').addEventListener('click', async () =>
     };
 
     try {
-        const response = await fetch('http://localhost:3006/api/update/user', {
+        const response = await fetch('http://localhost:3005/api/update/user', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
